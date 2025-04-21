@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../prisma/generated-client"
+  binaryTargets = ["native"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Voter {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  hasVoted  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  Vote      Vote[]
+}
+
+model Vote {
+  id        String   @id @default(uuid())
+  voterId   String
+  candidate String
+  timestamp DateTime @default(now())
+
+  voter Voter @relation(fields: [voterId], references: [id])
+}
