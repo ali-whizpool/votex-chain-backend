@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreateVoterDto } from './dto/create-voter.dto';
-import { UpdateVoterDto } from './dto/update-voter.dto';
+import { CreateVoterDto, UpdateVoterDto } from './dto/voter.dto';
 
 @Injectable()
 export class VoterService {
