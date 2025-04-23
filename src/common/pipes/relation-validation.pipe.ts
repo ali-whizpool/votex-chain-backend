@@ -3,7 +3,7 @@ import { HttpException, HttpStatus, PipeTransform } from '@nestjs/common';
 export abstract class RelationValidationPipe
   implements PipeTransform<unknown, unknown>
 {
-  protected allowedRelations = [];
+  protected allowedRelations: string[] = [];
 
   transform(values: string[]): string[] {
     if (!this.allValuesAreValid(values)) {

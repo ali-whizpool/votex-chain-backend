@@ -10,6 +10,15 @@ export const registerSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8),
   confirmPassword: z.string().min(8),
+  firstName: z.string().min(1, { message: "First name is required" }),
+  lastName: z.string().min(1, { message: "Last name is required" }),
+  dateOfBirth: z.string().refine((val) => !isNaN(Date.parse(val)), {
+    message: "Invalid date format",
+  }),
+  nationality: z.string().min(1, { message: "Nationality is required" }),
+  address: z.string().min(1, { message: "Address is required" }),
+  governmentId: z.string().min(1, { message: "Government ID is required" }),
+  phoneNumber: z.string().min(1, { message: "Phone number is required" }),
 }).refine((data) => data.password === data.confirmPassword, {
   message: "Passwords don't match",
   path: ["confirmPassword"],

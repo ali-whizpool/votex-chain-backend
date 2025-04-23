@@ -15,7 +15,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
     let status = HttpStatus.INTERNAL_SERVER_ERROR;
     let message = 'An unexpected error occurred';
-    let details = {};
+    let details: Record<string, unknown> = {};
 
     if (exception instanceof HttpException) {
       status = exception.getStatus();
@@ -50,7 +50,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
             'Database operation failed';
       }
 
-      details = exception.meta;
+      details = exception.meta || {};
     } else if (exception instanceof Error) {
       message = exception.message;
     }
